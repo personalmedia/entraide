@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>ENTRAIDE.PM</title>
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Suivez vos comptes entre amis et famille, 100% gratuit, offline et privé">
+    <meta name="theme-color" content="#2563eb">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="entraide.pm">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTkyIiBoZWlnaHQ9IjE5MiIgdmlld0JveD0iMCAwIDE5MiAxOTIiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIxOTIiIGhlaWdodD0iMTkyIiByeD0iMjQiIGZpbGw9IiMyNTYzZWIiLz4KPHN2ZyB4PSI0OCIgeT0iNDgiIHdpZHRoPSI5NiIgaGVpZ2h0PSI5NiIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+CjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0tMiAxNWwtNS01IDEuNDEtMS40MUw5IDE0LjE3bDYuNTktNi41OUwxNyA5bC04IDh6Ii8+Cjwvc3ZnPgo8L3N2Zz4K">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Cal Sans', 'Noto Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap');
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Install Banner -->
+    <div id="installBanner" class="fixed top-0 left-0 right-0 bg-blue-600 text-white p-3 z-50 transform -translate-y-full transition-transform duration-300">
+        <div class="container mx-auto px-4 max-w-lg">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                    <i class="fas fa-download mr-2"></i>
+                    <span class="text-sm font-medium">Installer l'app pour un accès rapide</span>
+                </div>
+                <div class="flex gap-2">
+                    <button id="installBtn" class="bg-white text-blue-600 text-xs px-3 py-1 rounded font-medium hover:bg-gray-100 transition-colors">Installer</button>
+                    <button id="dismissInstallBtn" class="text-blue-200 hover:text-white transition-colors">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mx-auto px-4 py-6 max-w-lg">
+        <!-- Header -->
+        <header class="text-center mb-8 relative">
+            <button id="infoBtn" class="absolute top-0 right-0 text-gray-500 hover:text-blue-600 transition-colors">
+                <i class="fas fa-circle-info text-xl"></i>
+            </button>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2">entraide.pm</h1>
+            <p class="text-gray-600 text-sm">Suivez vos comptes entre amis et famille</p>
+        </header>
+
+        <!-- Action Buttons -->
+        <div class="flex gap-3 mb-6">
+            <button id="addLendingBtn" class="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                + Nouveau prêt
+            </button>
+            <button id="importExportBtn" class="bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors">
+                ⚙️
+            </button>
+        </div>
+
+        <!-- Lendings List -->
+        <div id="lendingsList" class="space-y-4">
+            <!-- Lendings will be dynamically inserted here -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="text-center py-12 hidden">
+            <div class="text-gray-400 text-6xl mb-4">💰</div>
+            <h3 class="text-lg font-medium text-gray-700 mb-2">Aucun compte pour le moment</h3>
+            <p class="text-gray-500 text-sm">Ajoutez votre première transaction pour commencer</p>
+        </div>
+    </div>
+
+    <!-- Add Lending Modal -->
+    <div id="addLendingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg p-6 w-full max-w-md">
+                <h2 class="text-xl font-bold mb-4">Nouvelle transaction</h2>
+                <form id="addLendingForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Montant</label>
+                        <input type="number" id="lendingAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0,00" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">À/De</label>
+                        <input type="text" id="lendingParty" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Nom de votre ami" required>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
+                        <select id="lendingType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            <option value="lent">J'ai prêté de l'argent</option>
+                            <option value="borrowed">J'ai emprunté de l'argent</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                        <input type="date" id="lendingDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" id="cancelLendingBtn" class="flex-1 py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Annuler</button>
+                        <button type="submit" class="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Ajouter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div id="paymentModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg p-6 w-full max-w-md">
+                <h2 class="text-xl font-bold mb-4">Ajouter un paiement</h2>
+                <form id="paymentForm">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Montant reçu</label>
+                        <input type="number" id="paymentAmount" step="0.01" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="0,00" required>
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Date</label>
+                        <input type="date" id="paymentDate" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                    </div>
+                    <div class="flex gap-3">
+                        <button type="button" id="cancelPaymentBtn" class="flex-1 py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Annuler</button>
+                        <button type="submit" class="flex-1 py-2 px-4 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">Ajouter le paiement</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Import/Export Modal -->
+    <div id="importExportModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg p-6 w-full max-w-md">
+                <h2 class="text-xl font-bold mb-4">Importer/Exporter les données</h2>
+                <div class="space-y-4">
+                    <button id="exportBtn" class="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
+                        📥 Exporter les données
+                    </button>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Importer les données</label>
+                        <input type="file" id="importFile" accept=".json" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    <button type="button" id="closeImportExportBtn" class="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info Modal -->
+    <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
+        <div class="flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white rounded-lg p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+                <div class="flex justify-between items-center mb-4">
+                    <h2 class="text-xl font-bold text-blue-600">À propos d'entraide.pm</h2>
+                    <button id="closeInfoBtn" class="text-gray-500 hover:text-gray-700">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+                
+                <div class="space-y-4 text-gray-700">
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">🎯 Le but</h3>
+                        <p class="text-sm leading-relaxed">entraide.pm vous aide à suivre facilement vos prêts d'argent entre amis et famille. Plus de "qui doit quoi à qui ?" ou de disputes embarrassantes !</p>
+                    </div>
+                    
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">🏠 Pourquoi 100% offline ?</h3>
+                        <div class="text-sm leading-relaxed space-y-3">
+                            <p><strong>🔒 Vos données restent chez vous</strong><br>
+                            Aucun serveur, aucune base de données externe. Vos informations financières ne quittent jamais votre appareil.</p>
+                            
+                            <p><strong>⚡ Simplicité absolue</strong><br>
+                            Pas de création de compte, pas de connexion internet requise, pas de maintenance. L'app fonctionne même en mode avion !</p>
+                            
+                            <p><strong>💝 Confiance préservée</strong><br>
+                            Quand il s'agit d'argent entre proches, la discrétion est essentielle. Ici, même nous ne savons pas qui vous devez quoi.</p>
+                            
+                            <p><strong>🎁 Gratuit pour toujours</strong><br>
+                            Pas de serveurs à payer = pas d'abonnements cachés ni de publicités intrusives.</p>
+                            
+                            <p><strong>🚀 Contrôle total</strong><br>
+                            Exportez vos données quand vous voulez, importez-les ailleurs, sauvegardez-les comme bon vous semble.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="pt-3 border-t border-gray-200">
+                        <p class="text-xs text-gray-500 italic">
+                            Pensé pour préserver vos relations et votre vie privée 💙
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="storage.js"></script>
+    <script src="ui.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
