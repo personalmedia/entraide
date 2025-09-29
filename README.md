@@ -1,4 +1,4 @@
-# entraide.pm
+# [entraide.pm](https://entraide.pm)
 
 ## 🎯 Le but
 entraide.pm vous aide à suivre facilement vos prêts d'argent entre amis et famille. Plus de "qui doit quoi à qui ?" ou de disputes embarrassantes !
