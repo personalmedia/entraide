@@ -6,7 +6,7 @@
     <title>ENTRAIDE.PM</title>
     
     <!-- PWA Meta Tags -->
-    <meta name="description" content="Suivez vos comptes entre amis et famille, 100% gratuit, offline et privé">
+    <meta name="description" content="Suivez vos comptes entre amis, 100% gratuit, offline et privé">
     <meta name="theme-color" content="#2563eb">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -33,12 +33,12 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap'); .h-5 { height: 1.16rem !important; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
     <!-- Install Banner -->
-    <div id="installBanner" class="fixed top-0 left-0 right-0 bg-blue-600 text-white p-3 z-50 transform -translate-y-full transition-transform duration-300">
+    <div id="installBanner" class="fixed top-0 left-0 right-0 bg-black text-white p-3 z-50 transform -translate-y-full transition-transform duration-300">
         <div class="container mx-auto px-4 max-w-lg">
             <div class="flex items-center justify-between">
                 <div class="flex items-center">
@@ -46,8 +46,8 @@
                     <span class="text-sm font-medium">Installer l'app pour un accès rapide</span>
                 </div>
                 <div class="flex gap-2">
-                    <button id="installBtn" class="bg-white text-blue-600 text-xs px-3 py-1 rounded font-medium hover:bg-gray-100 transition-colors">Installer</button>
-                    <button id="dismissInstallBtn" class="text-blue-200 hover:text-white transition-colors">
+                    <button id="installBtn" class="bg-blue-600 text-xs px-3 py-1 rounded font-medium hover:bg-green-600 text-white transition-colors">Installer</button>
+                    <button id="dismissInstallBtn" class="text-white hover:text-gray-400 transition-colors">
                         <i class="fas fa-times"></i>
                     </button>
                 </div>
@@ -57,21 +57,21 @@
 
     <div class="container mx-auto px-4 py-6 max-w-lg">
         <!-- Header -->
-        <header class="text-center mb-8 relative">
-            <button id="infoBtn" class="absolute top-0 right-0 text-gray-500 hover:text-blue-600 transition-colors">
-                <i class="fas fa-circle-info text-xl"></i>
+        <header class="text-left mb-8 relative">
+            <button id="infoBtn" class="absolute top-0 right-0 text-black hover:text-gray-400 transition-colors">
+                <i class="fas fa-circle-info text-3xl"></i>
             </button>
-            <h1 class="text-3xl font-bold text-gray-900 mb-2">entraide.pm</h1>
-            <p class="text-gray-600 text-sm">Suivez vos comptes entre amis et famille</p>
+            <h1 class="text-3xl font-bold text-gray-900 mb-2"><img src="logo.png" class="h-5" /></h1>
+            <p class="text-gray-600 text-xs uppercase">Petits comptes entre amis</p>
         </header>
 
         <!-- Action Buttons -->
         <div class="flex gap-3 mb-6">
-            <button id="addLendingBtn" class="flex-1 bg-blue-600 text-white py-3 px-4 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+            <button id="addLendingBtn" class="flex-1 bg-black text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors">
                 + Nouveau prêt
             </button>
-            <button id="importExportBtn" class="bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-medium hover:bg-gray-300 transition-colors">
-                ⚙️
+            <button id="importExportBtn" class="bg-black text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors">
+                <i class="fas fa-download text-3xl"></i>
             </button>
         </div>
 
@@ -105,8 +105,8 @@
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Type</label>
                         <select id="lendingType" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                            <option value="lent">J'ai prêté de l'argent</option>
-                            <option value="borrowed">J'ai emprunté de l'argent</option>
+                            <option value="lent">J'ai envoyé de l'argent</option>
+                            <option value="borrowed">J'ai reçu de l'argent</option>
                         </select>
                     </div>
                     <div class="mb-6">
@@ -115,7 +115,7 @@
                     </div>
                     <div class="flex gap-3">
                         <button type="button" id="cancelLendingBtn" class="flex-1 py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Annuler</button>
-                        <button type="submit" class="flex-1 py-2 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">Ajouter</button>
+                        <button type="submit" class="flex-1 py-2 px-4 bg-black text-white rounded-lg hover:bg-blue-700 transition-colors">Ajouter</button>
                     </div>
                 </form>
             </div>
@@ -149,17 +149,18 @@
     <div id="importExportModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
-                <h2 class="text-xl font-bold mb-4">Importer/Exporter les données</h2>
+                <h2 class="text-xl font-bold mb-2">Exporter les données</h2>
                 <div class="space-y-4">
-                    <button id="exportBtn" class="w-full py-3 px-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                        📥 Exporter les données
+                    <button id="exportBtn" class="w-full py-3 px-4 bg-gray-100 text-black rounded-lg hover:bg-gray-200 border border-gray-300 transition-colors font-bold uppercase">
+                        Télécharger
                     </button>
-                    <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-2">Importer les données</label>
-                        <input type="file" id="importFile" accept=".json" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    </div>
-                    <button type="button" id="closeImportExportBtn" class="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Fermer</button>
                 </div>
+                <div class="mt-12">
+                    <label class="text-xl font-bold mb-2">Importer les données</label>
+                    <input type="file" id="importFile" accept=".json" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                </div>
+                <br/>
+                <button type="button" id="closeImportExportBtn" class="w-full py-2 px-4 border border-gray-300 rounded-lg text-gray-700 hover:bg-gray-50 transition-colors">Fermer</button>
             </div>
         </div>
     </div>
@@ -168,35 +169,35 @@
     <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-lg p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
-                <div class="flex justify-between items-center mb-4">
-                    <h2 class="text-xl font-bold text-blue-600">À propos d'entraide.pm</h2>
-                    <button id="closeInfoBtn" class="text-gray-500 hover:text-gray-700">
-                        <i class="fas fa-times text-xl"></i>
+                <div class="flex justify-between items-center mb-12">
+                    <h1 class="text-3xl font-bold text-gray-900"><img src="logo.png" class="h-5" /></h1>
+                    <button id="closeInfoBtn" class="text-black hover:text-gray-600">
+                        <i class="fas fa-times text-3xl"></i>
                     </button>
                 </div>
+                <h2 class="text-xl font-bold text-black">À propos</h2>
                 
                 <div class="space-y-4 text-gray-700">
                     <div>
-                        <h3 class="font-semibold text-gray-900 mb-2">🎯 Le but</h3>
-                        <p class="text-sm leading-relaxed">entraide.pm vous aide à suivre facilement vos prêts d'argent entre amis et famille. Plus de "qui doit quoi à qui ?" ou de disputes embarrassantes !</p>
+                        <p class="text-sm leading-relaxed">Cette application web 100% hors-ligne - sans serveur - vous aide à suivre facilement vos prêts d'argent entre amis. Plus de "qui doit quoi à qui ?" ou de disputes embarrassantes !</p>
                     </div>
                     
                     <div>
-                        <h3 class="font-semibold text-gray-900 mb-2">🏠 Pourquoi 100% offline ?</h3>
+                        <h2 class="text-xl font-bold text-black mt-12 mb-4">Pourquoi 100% offline ?</h2>
                         <div class="text-sm leading-relaxed space-y-3">
-                            <p><strong>🔒 Vos données restent chez vous</strong><br>
+                            <p><strong>Vos données restent chez vous</strong><br>
                             Aucun serveur, aucune base de données externe. Vos informations financières ne quittent jamais votre appareil.</p>
                             
-                            <p><strong>⚡ Simplicité absolue</strong><br>
+                            <p><strong>Simplicité absolue</strong><br>
                             Pas de création de compte, pas de connexion internet requise, pas de maintenance. L'app fonctionne même en mode avion !</p>
                             
-                            <p><strong>💝 Confiance préservée</strong><br>
+                            <p><strong>Confiance préservée</strong><br>
                             Quand il s'agit d'argent entre proches, la discrétion est essentielle. Ici, même nous ne savons pas qui vous devez quoi.</p>
                             
-                            <p><strong>🎁 Gratuit pour toujours</strong><br>
+                            <p><strong>Gratuit pour toujours</strong><br>
                             Pas de serveurs à payer = pas d'abonnements cachés ni de publicités intrusives.</p>
                             
-                            <p><strong>🚀 Contrôle total</strong><br>
+                            <p><strong>Contrôle total</strong><br>
                             Exportez vos données quand vous voulez, importez-les ailleurs, sauvegardez-les comme bon vous semble.</p>
                         </div>
                     </div>
@@ -204,6 +205,13 @@
                     <div class="pt-3 border-t border-gray-200">
                         <p class="text-xs text-gray-500 italic">
                             Pensé pour préserver vos relations et votre vie privée 💙
+                        </p>
+                    </div>
+                    
+                    <div class="pt-12 border-t border-gray-200">
+                        <p class="flex items-center justify-between text-xs text-gray-500">
+                            <a href="https://github.com/personalmedia/entraide" target="_blank">GitHub</a>
+                            <a href="https://datamix.io" target="_top">&copy; DATAMIX.IO SAS</a>
                         </p>
                     </div>
                 </div>
