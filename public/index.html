@@ -34,6 +34,7 @@
     </script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500;600;700&display=swap'); .h-5 { height: 1.16rem !important; }
+        body { transition-duration: .1s; }
     </style>
 </head>
 <body class="bg-gray-50 min-h-screen">
@@ -55,14 +56,14 @@
         </div>
     </div>
 
-    <div class="fixed inset-0 bg-black bg-opacity-50 z-0">
+    <div class="inset-0 bg-black bg-opacity-50 z-0">
         <div class="flex items-center justify-center min-h-screen">
-            <div class="m-4 bg-white rounded-lg p-4 w-full max-w-lg max-h-[100vh] overflow-y-auto">
+            <div class="m-4 bg-white rounded-lg p-4 w-full max-w-lg">
 
     <div class="container mx-auto px-4 py-6 max-w-lg">
         <!-- Header -->
         <header class="text-left mb-8 relative">
-            <button id="infoBtn" class="absolute top-[-8px] right-[8px] text-black hover:text-gray-400 transition-colors">
+            <button id="infoBtn" class="absolute top-[-3px] right-[8px] text-black hover:text-gray-700 transition-colors">
                 <i class="fas fa-circle-info text-3xl"></i>
             </button>
             <h1 class="text-3xl font-bold text-gray-900 mb-2"><img src="logo.png" class="h-5" /></h1>
@@ -72,7 +73,7 @@
         <!-- Action Buttons -->
         <div class="flex gap-3 mb-6">
             <button id="addLendingBtn" class="flex-1 bg-black text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors">
-                + Nouveau prêt
+                + Nouvelle transaction
             </button>
             <button id="importExportBtn" class="bg-black text-white py-3 px-4 rounded-lg font-medium hover:bg-gray-700 transition-colors">
                 <i class="fas fa-download text-3xl"></i>
@@ -174,7 +175,7 @@
     <!-- Info Modal -->
     <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
         <div class="flex items-center justify-center min-h-screen">
-            <div class="bg-white rounded-lg p-8 w-full max-w-lg max-h-[100vh] overflow-y-auto">
+            <div class="m-4 bg-white rounded-lg p-8 w-full max-w-lg max-h-[100vh] overflow-y-auto">
                 <div class="flex justify-between items-center mb-12">
                     <h1 class="text-3xl font-bold text-gray-900"><img src="logo.png" class="h-5" /></h1>
                     <button id="closeInfoBtn" class="text-black hover:text-gray-600">
@@ -189,7 +190,7 @@
                     </div>
                     
                     <div>
-                        <h2 class="text-xl font-bold text-black mt-12 mb-4">Pourquoi 100% offline ?</h2>
+                        <h2 class="text-xl font-bold text-black mt-12 mb-4">Pourquoi 100% hors-ligne ?</h2>
                         <div class="text-sm leading-relaxed space-y-3">
                             <p><strong>Vos données restent chez vous</strong><br>
                             Aucun serveur, aucune base de données externe. Vos informations financières ne quittent jamais votre appareil.</p>
@@ -205,11 +206,12 @@
                             
                             <p><strong>Contrôle total</strong><br>
                             Exportez vos données quand vous voulez, importez-les ailleurs, sauvegardez-les comme bon vous semble.</p>
+                            <div class="pt-10 uppercase font-bold">Votre contenu est un simple fichier JSON. stockable n'importe où, en local, en réseau ou sur un "Cloud".</div>
                         </div>
                     </div>
                     
                     <div class="pt-3 border-t border-gray-200">
-                        <p class="text-xs text-gray-500 italic">
+                        <p class="text-xs text-gray-500">
                             Pensé pour préserver vos relations et votre vie privée 💙
                         </p>
                     </div>

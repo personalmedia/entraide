@@ -40,7 +40,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
 
 function showInstallBanner() {
     installBanner.style.transform = 'translateY(0)';
-    document.body.style.paddingTop = '60px';
+    document.body.style.paddingTop = '48px';
 }
 
 function hideInstallBanner() {
