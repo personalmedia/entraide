@@ -1,7 +1,7 @@
 {
-  "name": "entraide.pm - Suivi des prêts",
+  "name": "entraide.pm",
   "short_name": "entraide.pm",
-  "description": "Suivez vos comptes entre amis et famille, 100% offline et privé",
+  "description": "Petits comptes entre amis - 100% offline et privé",
   "start_url": "/",
   "display": "fullscreen",
   "orientation": "portrait",
