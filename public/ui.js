@@ -212,8 +212,8 @@ class UIManager {
         lendingsList.innerHTML = accounts.map(account => {
             const balance = this.storage.calculateBalance(account);
             const isOwed = balance > 0;
-            const statusColor = balance > 0 ? 'text-red-600' : balance < 0 ? 'text-orange-600' : 'text-green-600';
-            const statusText = balance > 0 ? 'Vous doit' : balance < 0 ? 'Vous devez' : 'Équilibré';
+            const statusColor = balance > 0 ? 'text-red-600' : balance < 0 ? 'text-yellow-600' : 'text-green-600';
+            const statusText = balance > 0 ? 'Vous doit' : balance < 0 ? 'Vous devez' : 'Équilibre';
             const lastTransaction = account.transactions[account.transactions.length - 1];
 
             return `
@@ -232,7 +232,7 @@ class UIManager {
                                     </span>
                                 </div>
                                 <div class="mt-1">
-                                    <span class="text-xs px-2 py-1 rounded-full ${isOwed ? 'bg-red-100 text-red-700' : balance < 0 ? 'bg-orange-100 text-orange-700' : 'bg-green-100 text-green-700'}">
+                                    <span class="text-xs px-2 py-1 rounded-full ${isOwed ? 'bg-red-100 text-red-700' : balance < 0 ? 'bg-yellow-100 text-yellow-700' : 'bg-green-100 text-green-700'}">
                                         ${statusText}
                                     </span>
                                 </div>
@@ -271,7 +271,7 @@ class UIManager {
                             }
                             
                             <div class="mt-3 pt-3 border-t border-gray-200 flex justify-between items-center">
-                                <span class="text-sm text-gray-600">Solde : <span class="font-medium ${statusColor}">${balance !== 0 ? this.formatCurrency(balance) : 'Équilibré'}</span></span>
+                                <span class="text-sm text-gray-600">Solde : <span class="font-medium ${statusColor}">${balance !== 0 ? this.formatCurrency(balance) : '0 -'}</span></span>
                                 <button onclick="ui.deleteAccount('${account.id}')" class="text-red-500 hover:text-red-700 text-xs">Supprimer le compte</button>
                             </div>
                         </div>
