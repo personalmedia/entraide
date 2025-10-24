@@ -7,11 +7,11 @@
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Suivez vos comptes entre amis, 100% gratuit, offline et privé">
-    <meta name="theme-color" content="#2563eb">
+    <meta name="theme-color" content="#000000">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="entraide.pm">
-    <meta name="msapplication-TileColor" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#000000">
     
     <!-- PWA Manifest -->
     <link rel="manifest" href="manifest.json">
@@ -55,10 +55,14 @@
         </div>
     </div>
 
+    <div class="fixed inset-0 bg-black bg-opacity-50 z-0">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="m-4 bg-white rounded-lg p-4 w-full max-w-lg max-h-[100vh] overflow-y-auto">
+
     <div class="container mx-auto px-4 py-6 max-w-lg">
         <!-- Header -->
         <header class="text-left mb-8 relative">
-            <button id="infoBtn" class="absolute top-0 right-0 text-black hover:text-gray-400 transition-colors">
+            <button id="infoBtn" class="absolute top-[-8px] right-[8px] text-black hover:text-gray-400 transition-colors">
                 <i class="fas fa-circle-info text-3xl"></i>
             </button>
             <h1 class="text-3xl font-bold text-gray-900 mb-2"><img src="logo.png" class="h-5" /></h1>
@@ -84,15 +88,17 @@
         <div id="emptyState" class="text-center py-12 hidden">
             <div class="text-gray-400 text-6xl mb-4">💰</div>
             <h3 class="text-lg font-medium text-gray-700 mb-2">Aucun compte pour le moment</h3>
-            <p class="text-gray-500 text-sm">Ajoutez votre première transaction pour commencer</p>
+            <p class="text-black text-sm">Ajoutez votre première transaction pour commencer</p>
         </div>
     </div>
+
+</div></div></div>
 
     <!-- Add Lending Modal -->
     <div id="addLendingModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
         <div class="flex items-center justify-center min-h-screen p-4">
             <div class="bg-white rounded-lg p-6 w-full max-w-md">
-                <h2 class="text-xl font-bold mb-4">Nouvelle transaction</h2>
+                <h2 class="text-xl font-bold mb-12">Nouvelle transaction</h2>
                 <form id="addLendingForm">
                     <div class="mb-4">
                         <label class="block text-sm font-medium text-gray-700 mb-2">Montant</label>
@@ -167,8 +173,8 @@
 
     <!-- Info Modal -->
     <div id="infoModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white rounded-lg p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto">
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="bg-white rounded-lg p-8 w-full max-w-lg max-h-[100vh] overflow-y-auto">
                 <div class="flex justify-between items-center mb-12">
                     <h1 class="text-3xl font-bold text-gray-900"><img src="logo.png" class="h-5" /></h1>
                     <button id="closeInfoBtn" class="text-black hover:text-gray-600">
